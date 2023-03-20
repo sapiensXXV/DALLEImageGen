@@ -9,21 +9,26 @@
 /* Begin PBXBuildFile section */
 		BBC6872929C8599E0070F08F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6872829C8599E0070F08F /* AppDelegate.swift */; };
 		BBC6872B29C8599E0070F08F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6872A29C8599E0070F08F /* SceneDelegate.swift */; };
-		BBC6872D29C8599E0070F08F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6872C29C8599E0070F08F /* ViewController.swift */; };
+		BBC6872D29C8599E0070F08F /* PromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6872C29C8599E0070F08F /* PromptViewController.swift */; };
 		BBC6873029C8599E0070F08F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC6872E29C8599E0070F08F /* Main.storyboard */; };
 		BBC6873229C8599E0070F08F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC6873129C8599E0070F08F /* Assets.xcassets */; };
 		BBC6873529C8599E0070F08F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC6873329C8599E0070F08F /* LaunchScreen.storyboard */; };
+		BBC6874229C85EC70070F08F /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = BBC6874129C85EC70070F08F /* OpenAIKit */; };
+		BBC6874429C85F810070F08F /* OpenAIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6874329C85F810070F08F /* OpenAIViewModel.swift */; };
+		BBC6874629C878DC0070F08F /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBC6874529C878DC0070F08F /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BBC6872529C8599E0070F08F /* DALLEImageGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DALLEImageGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC6872829C8599E0070F08F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC6872A29C8599E0070F08F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BBC6872C29C8599E0070F08F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BBC6872C29C8599E0070F08F /* PromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptViewController.swift; sourceTree = "<group>"; };
 		BBC6872F29C8599E0070F08F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BBC6873129C8599E0070F08F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBC6873429C8599E0070F08F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBC6873629C8599E0070F08F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBC6874329C85F810070F08F /* OpenAIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIViewModel.swift; sourceTree = "<group>"; };
+		BBC6874529C878DC0070F08F /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBC6874229C85EC70070F08F /* OpenAIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +73,7 @@
 		BBC6873C29C859AF0070F08F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BBC6874329C85F810070F08F /* OpenAIViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -74,7 +81,7 @@
 		BBC6873D29C859BA0070F08F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BBC6872C29C8599E0070F08F /* ViewController.swift */,
+				BBC6872C29C8599E0070F08F /* PromptViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,6 +102,7 @@
 				BBC6873129C8599E0070F08F /* Assets.xcassets */,
 				BBC6873329C8599E0070F08F /* LaunchScreen.storyboard */,
 				BBC6873629C8599E0070F08F /* Info.plist */,
+				BBC6874529C878DC0070F08F /* Keys.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -115,6 +123,9 @@
 			dependencies = (
 			);
 			name = DALLEImageGen;
+			packageProductDependencies = (
+				BBC6874129C85EC70070F08F /* OpenAIKit */,
+			);
 			productName = DALLEImageGen;
 			productReference = BBC6872529C8599E0070F08F /* DALLEImageGen.app */;
 			productType = "com.apple.product-type.application";
@@ -143,6 +154,9 @@
 				Base,
 			);
 			mainGroup = BBC6871C29C8599E0070F08F;
+			packageReferences = (
+				BBC6874029C85EC60070F08F /* XCRemoteSwiftPackageReference "OpenAIKit" */,
+			);
 			productRefGroup = BBC6872629C8599E0070F08F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -157,6 +171,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBC6874629C878DC0070F08F /* Keys.plist in Resources */,
 				BBC6873529C8599E0070F08F /* LaunchScreen.storyboard in Resources */,
 				BBC6873229C8599E0070F08F /* Assets.xcassets in Resources */,
 				BBC6873029C8599E0070F08F /* Main.storyboard in Resources */,
@@ -170,7 +185,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBC6872D29C8599E0070F08F /* ViewController.swift in Sources */,
+				BBC6874429C85F810070F08F /* OpenAIViewModel.swift in Sources */,
+				BBC6872D29C8599E0070F08F /* PromptViewController.swift in Sources */,
 				BBC6872929C8599E0070F08F /* AppDelegate.swift in Sources */,
 				BBC6872B29C8599E0070F08F /* SceneDelegate.swift in Sources */,
 			);
@@ -390,6 +406,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BBC6874029C85EC60070F08F /* XCRemoteSwiftPackageReference "OpenAIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MarcoDotIO/OpenAIKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BBC6874129C85EC70070F08F /* OpenAIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBC6874029C85EC60070F08F /* XCRemoteSwiftPackageReference "OpenAIKit" */;
+			productName = OpenAIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BBC6871D29C8599E0070F08F /* Project object */;
 }
