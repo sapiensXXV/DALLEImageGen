@@ -108,8 +108,6 @@ extension PromptViewController {
             indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             indicatorView.widthAnchor.constraint(equalToConstant: 50),
             indicatorView.heightAnchor.constraint(equalToConstant: 50),
-            
-            
         ])
     }
     
@@ -135,12 +133,22 @@ extension PromptViewController {
 // MARK: - OpenAIVIewModelDelegate
 extension PromptViewController: OpenAIViewModelDelegate {
     func openAIErrorOccur(with errorResponse: OpenAIErrorResponse) {
-        print(#function)
-        suspendIndicator()
+        
         let errorType = errorResponse.error.type
-        print(errorType)
+        let message = errorResponse.error.message
         
-        
+        DispatchQueue.main.async { [weak self] in
+            self?.suspendIndicator()
+            
+            let alert = UIAlertController(
+                title: "오류",
+                message: "잘못된 입력입니다.\n빈칸을 전송하거나 적절하지 못한 단어를 전송하지 마세요",
+                preferredStyle: .alert
+            )
+            
+            alert.addAction(UIAlertAction(title: "알겠습니다", style: .default))
+            self?.present(alert, animated: true)
+        }
     }
     
     func openAIResultImageDidChange(to image: UIImage) {
