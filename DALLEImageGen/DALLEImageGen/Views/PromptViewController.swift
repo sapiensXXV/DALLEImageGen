@@ -42,6 +42,18 @@ final class PromptViewController: UIViewController {
         return button
     }()
     
+    private let indicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.isHidden = true
+        indicatorView.style = .large
+        indicatorView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        indicatorView.layer.cornerRadius = 8
+        
+        return indicatorView
+    }()
+    
     private let openAIViewModel: OpenAIViewModel = OpenAIViewModel()
     
     override func viewDidLoad() {
@@ -56,6 +68,7 @@ final class PromptViewController: UIViewController {
 extension PromptViewController {
     
     private func configure() {
+        configureNavigation()
         configureSubviews()
         configureConstraints()
         configureActions()
@@ -69,6 +82,7 @@ extension PromptViewController {
         view.addSubview(imageView)
         view.addSubview(promptTextField)
         view.addSubview(generateButton)
+        view.addSubview(indicatorView)
     }
     
     private func configureConstraints() {
@@ -88,6 +102,12 @@ extension PromptViewController {
             generateButton.heightAnchor.constraint(equalToConstant: 40),
             generateButton.widthAnchor.constraint(equalToConstant: 60),
             
+            indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            indicatorView.widthAnchor.constraint(equalToConstant: 50),
+            indicatorView.heightAnchor.constraint(equalToConstant: 50),
+            
+            
         ])
     }
     
@@ -95,8 +115,12 @@ extension PromptViewController {
         generateButton.addAction(UIAction(handler: { action in
             Task {
                 print("Activate")
+                self.indicatorView.isHidden = false
+                self.indicatorView.startAnimating()
                 guard let text = self.promptTextField.text,
                       let result = await self.openAIViewModel.generateImage(prompt: text) else { return }
+                self.indicatorView.stopAnimating()
+                self.indicatorView.isHidden = true
                 self.imageView.image = result
             }
         }), for: .touchUpInside)
