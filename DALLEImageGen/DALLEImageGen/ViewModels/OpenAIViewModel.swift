@@ -13,10 +13,14 @@ final class OpenAIViewModel {
     private var openai: OpenAI?
     
     func setup() {
+        guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
+              let keys = NSDictionary(contentsOfFile: path),
+              let organizationId = keys.object(forKey: "OpenAIOrganizationID") as? String,
+              let apiKey = keys.object(forKey: "OpenAIAPIKey") as? String else { return }
         openai = OpenAI(
             Configuration(
-                organizationId: "January1st",
-                apiKey: "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"
+                organizationId: organizationId,
+                apiKey: apiKey
             )
         )
     }
