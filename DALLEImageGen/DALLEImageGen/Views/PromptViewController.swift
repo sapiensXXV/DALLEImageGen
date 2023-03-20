@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Properties and LifeCycle
 final class PromptViewController: UIViewController {
 
     private let imageView: UIImageView = {
@@ -16,7 +17,7 @@ final class PromptViewController: UIViewController {
         imageView.backgroundColor = .systemGray5
         imageView.layer.cornerRadius = 7
         imageView.tintColor = .gray
-        imageView.contentMode = .center
+        imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
@@ -25,6 +26,7 @@ final class PromptViewController: UIViewController {
         let textField = UITextField()
         
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "이곳에 입력하세요 ..."
         
         return textField
     }()
@@ -40,9 +42,12 @@ final class PromptViewController: UIViewController {
         return button
     }()
     
+    private let openAIViewModel: OpenAIViewModel = OpenAIViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        openAIViewModel.setup()
     }
 }
 
@@ -52,10 +57,11 @@ extension PromptViewController {
     private func configure() {
         configureSubviews()
         configureConstraints()
+        configureActions()
     }
     
     private func configureNavigation() {
-        self.navigationItem.title = "이미지 생성"
+        self.navigationItem.title = "DALLE-E 이미지 생성봇"
     }
     
     private func configureSubviews() {
@@ -70,22 +76,36 @@ extension PromptViewController {
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Metric.horizonMargin.rawValue)),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -CGFloat(Metric.horizonMargin.rawValue)),
             
-//            promptTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Metric.horizonMargin.rawValue)),
-//            promptTextField.
+            promptTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            promptTextField.centerYAnchor.constraint(equalTo: generateButton.centerYAnchor),
+            promptTextField.heightAnchor.constraint(equalToConstant: 60),
             
-            generateButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 6),
+            generateButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12),
             generateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -6),
-            generateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 6),
-            generateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -6),
-            generateButton.heightAnchor.constraint(equalToConstant: 40)
+            generateButton.leadingAnchor.constraint(equalTo: promptTextField.trailingAnchor, constant: 8),
+            generateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            generateButton.heightAnchor.constraint(equalToConstant: 40),
+            generateButton.widthAnchor.constraint(equalToConstant: 60),
             
         ])
     }
+    
+    private func configureActions() {
+        generateButton.addAction(UIAction(handler: { action in
+            Task {
+                print("Activate")
+                guard let text = self.promptTextField.text,
+                      let result = await self.openAIViewModel.generateImage(prompt: text) else { return }
+                self.imageView.image = result
+            }
+        }), for: .touchUpInside)
+    }
 }
+
 
 extension PromptViewController {
     enum Metric: Int {
-        case horizonMargin = 6
+        case horizonMargin = 8
     }
 }
 

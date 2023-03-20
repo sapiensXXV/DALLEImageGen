@@ -13,7 +13,7 @@ final class OpenAIViewModel {
     private var openai: OpenAI?
     
     func setup() {
-        let openai = OpenAI(
+        openai = OpenAI(
             Configuration(
                 organizationId: "January1st",
                 apiKey: "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"
@@ -22,6 +22,7 @@ final class OpenAIViewModel {
     }
     
     func generateImage(prompt: String) async -> UIImage? {
+        print(#function)
         guard let openai = openai else { return nil }
         
         do {
