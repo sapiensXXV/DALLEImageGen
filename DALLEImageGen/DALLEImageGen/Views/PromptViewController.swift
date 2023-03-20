@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import OpenAIKit
 
 // MARK: - Properties and LifeCycle
 final class PromptViewController: UIViewController {
@@ -60,11 +61,12 @@ final class PromptViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configure()
+        openAIViewModel.delegate = self
         openAIViewModel.setup()
     }
 }
 
-// MARK: - Configurations
+// MARK: - Functions
 extension PromptViewController {
     
     private func configure() {
@@ -113,20 +115,44 @@ extension PromptViewController {
     
     private func configureActions() {
         generateButton.addAction(UIAction(handler: { action in
-            Task {
-                print("Activate")
-                self.indicatorView.isHidden = false
-                self.indicatorView.startAnimating()
-                guard let text = self.promptTextField.text,
-                      let result = await self.openAIViewModel.generateImage(prompt: text) else { return }
-                self.indicatorView.stopAnimating()
-                self.indicatorView.isHidden = true
-                self.imageView.image = result
-            }
+            self.activateIndicator()
+            guard let text = self.promptTextField.text else { return }
+            self.openAIViewModel.activate(.generateImage(text))
         }), for: .touchUpInside)
+    }
+    
+    private func activateIndicator() {
+        indicatorView.isHidden = true
+        indicatorView.startAnimating()
+    }
+    
+    private func suspendIndicator() {
+        indicatorView.isHidden = false
+        indicatorView.stopAnimating()
     }
 }
 
+// MARK: - OpenAIVIewModelDelegate
+extension PromptViewController: OpenAIViewModelDelegate {
+    func openAIErrorOccur(with errorResponse: OpenAIErrorResponse) {
+        print(#function)
+        suspendIndicator()
+        let errorType = errorResponse.error.type
+        print(errorType)
+        
+        
+    }
+    
+    func openAIResultImageDidChange(to image: UIImage) {
+        print(#function)
+        DispatchQueue.main.async { [weak self] in
+            self?.imageView.image = image
+            self?.suspendIndicator()
+        }
+    }
+    
+    
+}
 
 extension PromptViewController {
     enum Metric: Int {
