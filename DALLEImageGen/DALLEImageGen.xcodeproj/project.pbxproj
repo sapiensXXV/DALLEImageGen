@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB81A96B29C8A925005340E0 /* OpenAIViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81A96A29C8A925005340E0 /* OpenAIViewModelDelegate.swift */; };
+		BB81A96E29C8B3BA005340E0 /* OpenAIErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81A96D29C8B3BA005340E0 /* OpenAIErrorType.swift */; };
 		BBC6872929C8599E0070F08F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6872829C8599E0070F08F /* AppDelegate.swift */; };
 		BBC6872B29C8599E0070F08F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6872A29C8599E0070F08F /* SceneDelegate.swift */; };
 		BBC6872D29C8599E0070F08F /* PromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6872C29C8599E0070F08F /* PromptViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB81A96A29C8A925005340E0 /* OpenAIViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIViewModelDelegate.swift; sourceTree = "<group>"; };
+		BB81A96D29C8B3BA005340E0 /* OpenAIErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIErrorType.swift; sourceTree = "<group>"; };
 		BBC6872529C8599E0070F08F /* DALLEImageGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DALLEImageGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC6872829C8599E0070F08F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC6872A29C8599E0070F08F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB81A96929C8A802005340E0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BB81A96A29C8A925005340E0 /* OpenAIViewModelDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		BB81A96C29C8B3B0005340E0 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				BB81A96D29C8B3BA005340E0 /* OpenAIErrorType.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		BBC6871C29C8599E0070F08F = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +93,7 @@
 		BBC6873C29C859AF0070F08F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BB81A96929C8A802005340E0 /* Protocols */,
 				BBC6874329C85F810070F08F /* OpenAIViewModel.swift */,
 			);
 			path = ViewModels;
@@ -89,6 +110,7 @@
 		BBC6873E29C859BF0070F08F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BB81A96C29C8B3B0005340E0 /* Error */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,9 +207,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB81A96B29C8A925005340E0 /* OpenAIViewModelDelegate.swift in Sources */,
 				BBC6874429C85F810070F08F /* OpenAIViewModel.swift in Sources */,
 				BBC6872D29C8599E0070F08F /* PromptViewController.swift in Sources */,
 				BBC6872929C8599E0070F08F /* AppDelegate.swift in Sources */,
+				BB81A96E29C8B3BA005340E0 /* OpenAIErrorType.swift in Sources */,
 				BBC6872B29C8599E0070F08F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
