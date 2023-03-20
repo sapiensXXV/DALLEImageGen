@@ -98,5 +98,5 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-info.plist
+*.plist
 
